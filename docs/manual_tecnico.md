@@ -163,7 +163,7 @@ Almacena los comentarios asociados a cada ticket.
 users (1) ------- crea ------> (N) tickets
 users (1) ------- asignado ------> (N) tickets
 users (1) ------- comenta ------> (N) ticket_comments
-tickets (1)------- tiene ------> (N) ticket_comments
+tickets(1)------- tiene ------> (N) ticket_comments
 ```
 
 **Cardinalidad**:
@@ -598,6 +598,12 @@ mysql -u root -p helpdesk_db < backup_20241213.sql
 5. Reiniciar la aplicación
 
 **Importante tener todo actualizado**
+
+**Mejoras del codigo**
+Se le añadio un Faceted Search para faciltar la busqueda de tickets:
+    -filtro por titulo o texto del titulo del ticket (escribiendo el nombre del ticket)
+    -filtro por priority 
+    -filtro por status
 
 **Link del repositorio**
 `https://github.com/Crespo3023/helpdesk-agosto-2025#`
