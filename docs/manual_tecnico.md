@@ -599,11 +599,11 @@ mysql -u root -p helpdesk_db < backup_20241213.sql
 
 **Importante tener todo actualizado**
 
-**Mejoras del codigo**
-Se le añadio un Faceted Search para faciltar la busqueda de tickets:
-    -filtro por titulo o texto del titulo del ticket (escribiendo el nombre del ticket)
-    -filtro por priority 
-    -filtro por status
+
+**Faceted Search (Mejora del codigo)**:
+- filtro por titulo o texto del titulo del ticket (escribiendo el nombre del ticket)
+- filtro por priority 
+- filtro por status
 
 **Link del repositorio**
 `https://github.com/Crespo3023/helpdesk-agosto-2025#`
