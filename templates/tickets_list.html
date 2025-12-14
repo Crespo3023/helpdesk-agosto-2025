@@ -1,0 +1,438 @@
+{% extends "base.html" %} 
+{% block content %}
+<div class="container mt-4">
+  <!-- Header Section -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="mb-1">Tickets Management</h2>
+      <p class="text-muted mb-0">Manage and track all support tickets</p>
+    </div>
+    <a href="{{ url_for('ticket_new') }}" class="btn btn-primary">
+      <i class="bi bi-plus-circle me-2"></i>New Ticket
+    </a>
+  </div>
+
+  <!-- BUSCADOR Y FILTROS -->
+  <div class="card shadow-sm mb-3">
+    <div class="card-body">
+      <div class="row g-3">
+        <!-- Búsqueda por título -->
+        <div class="col-md-6">
+          <label for="searchInput" class="form-label">
+            <i class="bi bi-search me-1"></i>Search by Title
+          </label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="searchInput" 
+            placeholder="Type to search tickets..."
+            autocomplete="off"
+          >
+        </div>
+        
+        <!-- Filtro por estado -->
+        <div class="col-md-3">
+          <label for="statusFilter" class="form-label">
+            <i class="bi bi-funnel me-1"></i>Status
+          </label>
+          <select class="form-select" id="statusFilter">
+            <option value="">All Status</option>
+            <option value="open">Open</option>
+            <option value="progress">In Progress</option>
+            <option value="resolved">Resolved</option>
+          </select>
+        </div>
+        
+        <!-- Filtro por prioridad -->
+        <div class="col-md-3">
+          <label for="priorityFilter" class="form-label">
+            <i class="bi bi-flag me-1"></i>Priority
+          </label>
+          <select class="form-select" id="priorityFilter">
+            <option value="">All Priorities</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Contador de resultados -->
+      <div class="mt-3">
+        <small class="text-muted">
+          <i class="bi bi-info-circle me-1"></i>
+          Showing <strong id="resultCount">{{ tickets|length }}</strong> of <strong id="totalCount">{{ tickets|length }}</strong> tickets
+        </small>
+        <button class="btn btn-sm btn-outline-secondary ms-2" id="clearFilters">
+          <i class="bi bi-x-circle me-1"></i>Clear Filters
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tickets Table -->
+  <div class="card shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0" id="ticketsTable">
+          <thead>
+            <tr>
+              <th style="width: 80px">ID</th>
+              <th style="width: 20%">Title</th>
+              <th style="width: 25%">Description</th>
+              <th style="width: 120px">Status</th>
+              <th style="width: 120px">Priority</th>
+              <th>Created by</th>
+              <th>Assigned to</th>
+              <th style="width: 140px">Created at</th>
+              <th style="width: 100px" class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ticketsTableBody">
+            {% for t in tickets %}
+            {% set status_normalized = t.status|lower|replace('_', ' ')|replace('-', ' ')|trim %}
+            <tr class="ticket-row" 
+                data-title="{{ t.title|lower }}" 
+                data-status="{{ status_normalized }}" 
+                data-priority="{{ t.priority|lower }}"
+                data-original-status="{{ t.status }}">
+              <td data-label="ID">
+                <strong>#{{ t.id }}</strong>
+              </td>
+              <td data-label="Title">
+                <div
+                  class="text-truncate"
+                  style="max-width: 200px"
+                  title="{{ t.title }}"
+                >
+                  {{ t.title }}
+                </div>
+              </td>
+              
+              <td data-label="Description">
+                <div
+                  class="text-truncate"
+                  style="max-width: 300px"
+                  title="{{ t.description }}"
+                >
+                  {% if t.description %}
+                    {{ t.description }}
+                  {% else %}
+                    <span class="text-muted">
+                      <i class="bi bi-dash-circle me-1"></i>No description
+                    </span>
+                  {% endif %}
+                </div>
+              </td>
+              
+              <!-- STATUS con manejo de mayúsculas/minúsculas -->
+              <td data-label="Status">
+                {% if 'open' in status_normalized %}
+                <span class="badge bg-primary">
+                  <i class="bi bi-circle-fill me-1" style="font-size: 0.5rem"></i>
+                  Open
+                </span>
+                {% elif 'progress' in status_normalized or 'in progress' in status_normalized %}
+                <span class="badge bg-warning">
+                  <i class="bi bi-arrow-repeat me-1"></i>In Progress
+                </span>
+                {% elif 'resolved' in status_normalized or 'resolve' in status_normalized or 'close' in status_normalized %}
+                <span class="badge bg-success">
+                  <i class="bi bi-check-circle-fill me-1"></i>Resolved
+                </span>
+                {% else %}
+                <span class="badge bg-info">
+                  <i class="bi bi-question-circle me-1"></i>{{ t.status }}
+                </span>
+                {% endif %}
+              </td>
+              
+              <!-- PRIORITY con manejo de mayúsculas y minúsculas -->
+              <td data-label="Priority">
+                {% set priority_lower = t.priority|lower %}
+                {% if 'high' in priority_lower %}
+                <span class="badge bg-danger">
+                  <i class="bi bi-exclamation-triangle-fill me-1"></i>High
+                </span>
+                {% elif 'medium' in priority_lower %}
+                <span class="badge bg-warning">
+                  <i class="bi bi-dash-circle-fill me-1"></i>Medium
+                </span>
+                {% elif 'low' in priority_lower %}
+                <span class="badge bg-info">
+                  <i class="bi bi-info-circle-fill me-1"></i>Low
+                </span>
+                {% else %}
+                <span class="badge bg-primary">
+                  <i class="bi bi-question-circle me-1"></i>{{ t.priority }}
+                </span>
+                {% endif %}
+              </td>
+              
+              <td data-label="Created by">
+                <i class="bi bi-person-circle me-1"></i>{{ t.created_by_name }}
+              </td>
+              <td data-label="Assigned to">
+                {% if t.assigned_to_name %}
+                <i class="bi bi-person-check me-1"></i>{{ t.assigned_to_name }}
+                {% else %}
+                <span class="text-muted">
+                  <i class="bi bi-dash-circle me-1"></i>Unassigned
+                </span>
+                {% endif %}
+              </td>
+              <td data-label="Created at">
+                <small class="text-muted">
+                  <i class="bi bi-calendar3 me-1"></i>{{ t.created_at }}
+                </small>
+              </td>
+              <td data-label="Actions" class="text-center">
+                <a
+                  href="{{ url_for('ticket_detail', ticket_id=t.id) }}"
+                  class="btn btn-secondary btn-sm action-btn"
+                  title="Edit ticket"
+                >
+                  <i class="bi bi-pencil-fill" style="color: #faf9f9ff"></i></i><span style="color: #faf9f9ff">Edit </span>
+                </a>
+              </td>
+            </tr>
+            {% else %}
+            <tr id="emptyState">
+              <td colspan="9" class="text-center py-5">
+                <i class="bi bi-inbox" style="font-size: 3rem; color: #ccc"></i>
+                <p class="text-muted mt-3 mb-0">No tickets found</p>
+                <a
+                  href="{{ url_for('ticket_new') }}"
+                  class="btn btn-secondary btn-sm mt-2"
+                >
+                  <i class="bi bi-plus-circle me-1"  style="color: #faf9f9ff"></i><span style="color: #faf9f9ff">Create your first ticket</span>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+        <!-- Mensaje cuando no hay resultados de búsqueda -->
+        <div id="noResults" class="text-center py-5" style="display: none;">
+          <i class="bi bi-search" style="font-size: 3rem; color: #ccc"></i>
+          <p class="text-muted mt-3 mb-0">No tickets match your search criteria</p>
+          <button class="btn btn-sm btn-outline-primary mt-2" id="clearSearchBtn">
+            <i class="bi bi-arrow-counterclockwise me-1"></i>Clear Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JAVASCRIPT PARA EL BUSCADOR -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Elementos del DOM
+    const searchInput = document.getElementById('searchInput');
+    const statusFilter = document.getElementById('statusFilter');
+    const priorityFilter = document.getElementById('priorityFilter');
+    const clearFiltersBtn = document.getElementById('clearFilters');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    const ticketRows = document.querySelectorAll('.ticket-row');
+    const resultCount = document.getElementById('resultCount');
+    const totalCount = document.getElementById('totalCount');
+    const noResults = document.getElementById('noResults');
+    const tableBody = document.getElementById('ticketsTableBody');
+    
+    // Debug: mostrar todos los status en consola
+    console.log('=== DEBUG: Status de todos los tickets ===');
+    ticketRows.forEach((row, index) => {
+        console.log(`Ticket ${index + 1}:`, {
+            original: row.dataset.originalStatus,
+            normalized: row.dataset.status
+        });
+    });
+    
+    // Función de normalización de status (igual que en el template)
+    function normalizeStatus(status) {
+        return status.toLowerCase()
+                    .replace(/_/g, ' ')
+                    .replace(/-/g, ' ')
+                    .trim();
+    }
+    
+    // Función principal de filtrado
+    function filterTickets() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const statusValue = statusFilter.value.toLowerCase();
+        const priorityValue = priorityFilter.value.toLowerCase();
+        
+        let visibleCount = 0;
+        
+        ticketRows.forEach(row => {
+            const title = row.dataset.title;
+            const status = row.dataset.status; 
+            const priority = row.dataset.priority;
+            
+            // Verificar si cumple con todos los filtros
+            const matchesSearch = !searchTerm || title.includes(searchTerm);
+            
+            // Para el status, normalizar el valor del filtro también
+            let matchesStatus = true;
+            if (statusValue) {
+                const normalizedFilterValue = normalizeStatus(statusValue);
+                
+                // Verificar coincidencias
+                if (normalizedFilterValue === 'resolved') {
+                    // Para "resolved", aceptar cualquiera que contenga: resolved, resolve, o close
+                    matchesStatus = status.includes('resolved') || 
+                                  status.includes('resolve') || 
+                                  status.includes('close');
+                } else if (normalizedFilterValue === 'progress' || normalizedFilterValue === 'in progress') {
+                    // Para "in progress", aceptar ambas variantes
+                    matchesStatus = status.includes('progress') || status.includes('in progress');
+                } else {
+                    // Para otros valores, buscar directamente
+                    matchesStatus = status.includes(normalizedFilterValue);
+                }
+            }
+            
+            const matchesPriority = !priorityValue || priority.includes(priorityValue);
+            
+            // Mostrar u ocultar la fila
+            if (matchesSearch && matchesStatus && matchesPriority) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+        
+        // Actualizar contador de resultados
+        resultCount.textContent = visibleCount;
+        
+        // Mostrar mensaje de "sin resultados" si corresponde
+        if (visibleCount === 0 && ticketRows.length > 0) {
+            noResults.style.display = 'block';
+        } else {
+            noResults.style.display = 'none';
+        }
+        
+        // Debug
+        console.log('Filtrado:', {
+            searchTerm,
+            statusValue,
+            priorityValue,
+            visibleCount
+        });
+    }
+    
+    // Función para limpiar todos los filtros
+    function clearAllFilters() {
+        searchInput.value = '';
+        statusFilter.value = '';
+        priorityFilter.value = '';
+        filterTickets();
+    }
+    
+    // Event listeners
+    searchInput.addEventListener('input', filterTickets);
+    searchInput.addEventListener('keyup', filterTickets);
+    statusFilter.addEventListener('change', filterTickets);
+    priorityFilter.addEventListener('change', filterTickets);
+    clearFiltersBtn.addEventListener('click', clearAllFilters);
+    clearSearchBtn.addEventListener('click', clearAllFilters);
+    
+    // Resaltar texto coincidente (opcional pero mejora UX)
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+        
+        if (searchTerm) {
+            ticketRows.forEach(row => {
+                const titleCell = row.querySelector('[data-label="Title"] div');
+                const originalText = titleCell.getAttribute('title') || titleCell.textContent;
+                
+                if (!titleCell.getAttribute('data-original')) {
+                    titleCell.setAttribute('data-original', originalText);
+                }
+                
+                // Resaltar coincidencias
+                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                const highlighted = originalText.replace(regex, '<mark>$1</mark>');
+                titleCell.innerHTML = highlighted;
+            });
+        } else {
+            // Restaurar texto original
+            ticketRows.forEach(row => {
+                const titleCell = row.querySelector('[data-label="Title"] div');
+                const original = titleCell.getAttribute('data-original');
+                if (original) {
+                    titleCell.textContent = original;
+                }
+            });
+        }
+    });
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        // Ctrl/Cmd + K para enfocar búsqueda
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            searchInput.focus();
+        }
+        
+        // Escape para limpiar filtros
+        if (e.key === 'Escape' && document.activeElement === searchInput) {
+            clearAllFilters();
+            searchInput.blur();
+        }
+    });
+    
+    console.log('✅ Ticket search system initialized');
+    console.log(`📊 Total tickets: ${ticketRows.length}`);
+});
+</script>
+
+<!-- Estilos adicionales para el buscador -->
+<style>
+/* Destacar texto encontrado */
+mark {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 0.1rem 0.2rem;
+    border-radius: 2px;
+    font-weight: 600;
+}
+
+/* Animación suave para filas */
+.ticket-row {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.ticket-row[style*="display: none"] {
+    opacity: 0;
+    transform: scale(0.98);
+}
+
+/* Mejorar apariencia del input de búsqueda */
+#searchInput:focus {
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25) !important;
+}
+
+/* Botón de limpiar filtros */
+#clearFilters:hover {
+    background-color: #f8f9fa;
+    border-color: #6c757d;
+}
+
+/* Responsive para los filtros en móvil */
+@media (max-width: 768px) {
+    .card-body .row {
+        margin-bottom: 0.5rem;
+    }
+    
+    #clearFilters {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+}
+</style>
+
+{% endblock %}

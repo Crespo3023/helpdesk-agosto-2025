@@ -1,0 +1,836 @@
+/* ===========================
+   IMPORTAR FUENTE PERSONALIZADA
+=========================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ===========================
+   VARIABLES DE COLORES PERSONALIZADOS
+=========================== */
+:root {
+    /* Colores principales */
+    --color-primario: #2c3e50;
+    --color-secundario: #3498db;
+    --color-acento: #e74c3c;
+    --color-exito: #27ae60;
+    --color-advertencia: #f39c12;
+    --color-info: #3498db;
+    
+    /* Colores de fondo */
+    --bg-principal: #ecf0f1;
+    --bg-secundario: #ffffff;
+    --bg-oscuro: #34495e;
+    
+    /* Colores de texto */
+    --texto-principal: #2c3e50;
+    --texto-secundario: #5a6c7d;
+    --texto-claro: #ffffff;
+    --texto-oscuro: #1a252f;
+    --texto-muted: #6c757d;
+    
+    /* Fuente personalizada */
+    --fuente-principal: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ===========================
+   TIPOGRAFÍA GLOBAL
+=========================== */
+body {
+    font-family: var(--fuente-principal) !important;
+    color: var(--texto-principal) !important;
+    background-color: var(--bg-principal) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fuente-principal) !important;
+    font-weight: 700 !important;
+    color: var(--color-primario) !important;
+}
+
+p, span, div, label, input, textarea, select, button {
+    font-family: var(--fuente-principal) !important;
+}
+
+/* Tamaños de fuente base */
+h1 { font-size: 2.5rem !important; }
+h2 { font-size: 2rem !important; }
+h3 { font-size: 1.75rem !important; }
+h4 { font-size: 1.5rem !important; }
+h5 { font-size: 1.25rem !important; }
+h6 { font-size: 1rem !important; }
+
+/* Texto muted con buen contraste */
+.text-muted {
+    color: var(--texto-muted) !important;
+}
+
+/* ===========================
+   COLORES DEL NAVBAR
+=========================== */
+.navbar {
+    background-color: var(--color-primario) !important;
+    border-bottom: 3px solid var(--color-secundario) !important;
+}
+
+.navbar-brand {
+    color: var(--texto-claro) !important;
+    font-weight: 700 !important;
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus {
+    color: var(--color-secundario) !important;
+}
+
+.navbar .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500 !important;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+    color: var(--color-secundario) !important;
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.navbar-toggler-icon {
+    filter: brightness(0) invert(1);
+}
+
+/* ===========================
+   COLORES DE BOTONES
+=========================== */
+.btn-primary {
+    background-color: var(--color-secundario) !important;
+    border-color: var(--color-secundario) !important;
+    color: var(--texto-claro) !important;
+    font-weight: 500 !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #2980b9 !important;
+    border-color: #2980b9 !important;
+    color: var(--texto-claro) !important;
+}
+
+.btn-success {
+    background-color: var(--color-exito) !important;
+    border-color: var(--color-exito) !important;
+    color: var(--texto-claro) !important;
+    font-weight: 500 !important;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    background-color: #229954 !important;
+    border-color: #229954 !important;
+    color: var(--texto-claro) !important;
+}
+
+.btn-danger {
+    background-color: var(--color-acento) !important;
+    border-color: var(--color-acento) !important;
+    color: var(--texto-claro) !important;
+    font-weight: 500 !important;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+    background-color: #c0392b !important;
+    border-color: #c0392b !important;
+    color: var(--texto-claro) !important;
+}
+
+.btn-warning {
+    background-color: var(--color-advertencia) !important;
+    border-color: var(--color-advertencia) !important;
+    color: var(--texto-claro) !important;
+    font-weight: 500 !important;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+    background-color: #e67e22 !important;
+    border-color: #e67e22 !important;
+    color: var(--texto-claro) !important;
+}
+
+.btn-info {
+    background-color: var(--color-info) !important;
+    border-color: var(--color-info) !important;
+    color: var(--texto-claro) !important;
+    font-weight: 500 !important;
+}
+
+.btn-info:hover,
+.btn-info:focus {
+    background-color: #2980b9 !important;
+    border-color: #2980b9 !important;
+    color: var(--texto-claro) !important;
+}
+
+.btn-secondary {
+    background-color: #5a6c7d !important;
+    border-color: #5a6c7d !important;
+    color: var(--texto-claro) !important;
+    font-weight: 500 !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: #4a5866 !important;
+    border-color: #4a5866 !important;
+    color: var(--texto-claro) !important;
+}
+
+/* Botones pequeños */
+.btn-sm {
+    padding: 0.4rem 0.8rem !important;
+    font-size: 0.875rem !important;
+}
+
+/* ===========================
+   COLORES DE TABLAS
+=========================== */
+.table {
+    background-color: var(--bg-secundario) !important;
+}
+
+.table thead {
+    background-color: var(--color-primario) !important;
+    color: var(--texto-claro) !important;
+}
+
+.table thead th {
+    color: rgb(133, 133, 133) !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid var(--color-secundario) !important;
+    padding: 1rem 0.75rem !important;
+}
+
+.table tbody td {
+    color: var(--texto-principal) !important;
+    vertical-align: middle !important;
+    padding: 0.75rem !important;
+}
+
+.table tbody td strong {
+    color: var(--texto-oscuro) !important;
+}
+
+.table tbody td a {
+    color: var(--color-secundario) !important;
+    text-decoration: none !important;
+}
+
+.table tbody td a:hover {
+    color: #2980b9 !important;
+    text-decoration: underline !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa !important;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: var(--bg-secundario) !important;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #e3f2fd !important;
+    transition: background-color 0.2s ease !important;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6 !important;
+}
+
+.table-bordered td,
+.table-bordered th {
+    border: 1px solid #dee2e6 !important;
+}
+
+/* Truncate text in tables */
+.text-truncate {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+/* ===========================
+   COLORES DE ENLACES
+=========================== */
+a {
+    color: var(--color-secundario) !important;
+    text-decoration: none !important;
+}
+
+a:hover {
+    color: #2980b9 !important;
+    text-decoration: underline !important;
+}
+
+/* ===========================
+   COLORES DE CARDS
+=========================== */
+.card {
+    background-color: var(--bg-secundario) !important;
+    border-color: #dfe6e9 !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08) !important;
+}
+
+.card-header {
+    background-color: var(--color-primario) !important;
+    color: var(--texto-claro) !important;
+    font-weight: 600 !important;
+    border-bottom-color: var(--color-secundario) !important;
+}
+
+.card-title {
+    color: var(--color-primario) !important;
+    font-weight: 700 !important;
+}
+
+.card-body {
+    color: var(--texto-principal) !important;
+}
+
+/* Cards de colores con texto blanco */
+.card.bg-success,
+.card.bg-warning,
+.card.bg-danger,
+.card.bg-primary,
+.card.bg-secondary {
+    color: var(--texto-claro) !important;
+}
+
+.card.bg-success .card-body,
+.card.bg-warning .card-body,
+.card.bg-danger .card-body,
+.card.bg-primary .card-body,
+.card.bg-secondary .card-body {
+    color: var(--texto-claro) !important;
+}
+
+.card.bg-success h5,
+.card.bg-warning h5,
+.card.bg-danger h5,
+.card.bg-primary h5,
+.card.bg-secondary h5 {
+    color: var(--texto-claro) !important;
+}
+
+/* ===========================
+   COLORES DE BADGES (ESPECIFICIDAD MEJORADA)
+=========================== */
+.badge {
+    font-weight: 600 !important;
+    padding: 0.35rem 0.65rem !important;
+    font-size: 0.875rem !important;
+}
+
+/* Selectores más específicos para sobrescribir Bootstrap */
+.table .badge.bg-primary,
+.card .badge.bg-primary,
+.container .badge.bg-primary,
+.badge.bg-primary {
+    background-color: var(--color-secundario) !important;
+    color: var(--texto-claro) !important;
+}
+
+.table .badge.bg-success,
+.card .badge.bg-success,
+.container .badge.bg-success,
+.badge.bg-success {
+    background-color: var(--color-exito) !important;
+    color: var(--texto-claro) !important;
+}
+
+.table .badge.bg-danger,
+.card .badge.bg-danger,
+.container .badge.bg-danger,
+.badge.bg-danger {
+    background-color: var(--color-acento) !important;
+    color: var(--texto-claro) !important;
+}
+
+.table .badge.bg-warning,
+.card .badge.bg-warning,
+.container .badge.bg-warning,
+.badge.bg-warning {
+    background-color: var(--color-advertencia) !important;
+    color: var(--texto-oscuro) !important;
+}
+
+.table .badge.bg-info,
+.card .badge.bg-info,
+.container .badge.bg-info,
+.badge.bg-info {
+    background-color: var(--color-info) !important;
+    color: var(--texto-claro) !important;
+}
+
+.table .badge.bg-secondary,
+.card .badge.bg-secondary,
+.container .badge.bg-secondary,
+.badge.bg-secondary {
+    background-color: #5a6c7d !important;
+    color: var(--texto-claro) !important;
+}
+
+/* ===========================
+   COLORES DE ALERTAS
+=========================== */
+.alert-success {
+    background-color: #d4edda !important;
+    border-color: var(--color-exito) !important;
+    color: #155724 !important;
+}
+
+.alert-danger {
+    background-color: #f8d7da !important;
+    border-color: var(--color-acento) !important;
+    color: #721c24 !important;
+}
+
+.alert-warning {
+    background-color: #fff3cd !important;
+    border-color: var(--color-advertencia) !important;
+    color: #856404 !important;
+}
+
+.alert-info {
+    background-color: #d1ecf1 !important;
+    border-color: var(--color-info) !important;
+    color: #0c5460 !important;
+}
+
+/* ===========================
+   COLORES DE FORMULARIOS
+=========================== */
+.form-label {
+    color: var(--color-primario) !important;
+    font-weight: 600 !important;
+}
+
+.form-control,
+.form-select {
+    color: var(--texto-principal) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--color-secundario) !important;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25) !important;
+}
+
+/* ===========================
+   ICONOS BOOTSTRAP
+=========================== */
+.bi {
+    vertical-align: middle !important;
+}
+
+/* ===========================
+   SHADOW Y EFECTOS
+=========================== */
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+/* ===========================
+   RESPONSIVIDAD - MOBILE FIRST
+=========================== */
+
+/* Móviles pequeños (hasta 576px) */
+@media (max-width: 576px) {
+    /* Tipografía móvil */
+    body {
+        font-size: 14px !important;
+    }
+    
+    h1 { font-size: 1.75rem !important; }
+    h2 { font-size: 1.5rem !important; }
+    h3 { font-size: 1.3rem !important; }
+    h4 { font-size: 1.15rem !important; }
+    h5 { font-size: 1rem !important; }
+    h6 { font-size: 0.9rem !important; }
+    
+    /* Navbar móvil */
+    .navbar-brand {
+        font-size: 1.1rem !important;
+    }
+    
+    .nav-link {
+        font-size: 0.95rem !important;
+        text-align: center !important;
+        padding: 0.6rem 1rem !important;
+    }
+    
+    /* Contenedor móvil */
+    .container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    
+    /* Botones móvil */
+    .btn {
+        font-size: 0.9rem !important;
+        padding: 0.6rem 1rem !important;
+    }
+    
+    .d-flex.justify-content-between .btn {
+        width: 100% !important;
+        margin: 0.25rem 0 !important;
+    }
+    
+    /* Tablas móvil - Modo responsive con cards */
+    .table-responsive {
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    .table {
+        font-size: 0.85rem !important;
+        min-width: 100% !important;
+    }
+    
+    .table thead {
+        display: none !important;
+    }
+    
+    .table tbody tr {
+        display: block !important;
+        margin-bottom: 1rem !important;
+        border: 1px solid #dee2e6 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+        background-color: var(--bg-secundario) !important;
+    }
+    
+    .table tbody tr:nth-of-type(odd) {
+        background-color: var(--bg-secundario) !important;
+    }
+    
+    .table tbody td {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0.75rem !important;
+        border: none !important;
+        border-bottom: 1px solid #f0f0f0 !important;
+        font-size: 0.85rem !important;
+        color: var(--texto-principal) !important;
+    }
+    
+    .table tbody td:last-child {
+        border-bottom: none !important;
+    }
+    
+    .table tbody td::before {
+        content: attr(data-label) !important;
+        font-weight: 700 !important;
+        color: var(--color-principal) !important;
+        margin-right: 1rem !important;
+        flex-shrink: 0 !important;
+        width: 40% !important;
+    }
+    
+    .table tbody td > * {
+        text-align: right !important;
+        flex: 1 !important;
+    }
+    
+    /* Ajuste para botones en tablas móviles */
+    .table tbody td .btn {
+        width: auto !important;
+        margin: 0.15rem !important;
+        font-size: 0.8rem !important;
+        padding: 0.4rem 0.8rem !important;
+    }
+    
+    .table tbody td .btn-group {
+        display: flex !important;
+        gap: 0.25rem !important;
+        flex-wrap: wrap !important;
+        justify-content: flex-end !important;
+    }
+    
+    /* Cards móvil */
+    .card {
+        margin-bottom: 1rem !important;
+    }
+    
+    .card-body {
+        padding: 1rem !important;
+    }
+    
+    .card-title {
+        font-size: 1.1rem !important;
+    }
+    
+    /* Formularios móvil */
+    .form-control,
+    .form-select {
+        font-size: 0.9rem !important;
+    }
+    
+    .form-label {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Badges móvil */
+    .badge {
+        font-size: 0.75rem !important;
+        padding: 0.3rem 0.5rem !important;
+    }
+    
+    /* Alertas móvil */
+    .alert {
+        font-size: 0.9rem !important;
+        padding: 0.75rem !important;
+    }
+    
+    /* Flexbox móvil - convertir a columna */
+    .d-flex.justify-content-between {
+        flex-direction: column !important;
+    }
+    
+    .d-flex.justify-content-between > * {
+        margin-bottom: 0.5rem !important;
+        width: 100% !important;
+    }
+    
+    /* Grid de stats cards móvil */
+    .row > [class*='col-'] {
+        margin-bottom: 0.75rem !important;
+    }
+}
+
+/* Tablets pequeñas (577px - 767px) */
+@media (min-width: 577px) and (max-width: 767px) {
+    body {
+        font-size: 15px !important;
+    }
+    
+    h1 { font-size: 2rem !important; }
+    h2 { font-size: 1.7rem !important; }
+    h3 { font-size: 1.5rem !important; }
+    
+    .navbar-brand {
+        font-size: 1.25rem !important;
+    }
+    
+    .container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    
+    .btn {
+        font-size: 0.95rem !important;
+    }
+    
+    /* Tablas en tablets pequeñas - formato card */
+    .table thead {
+        display: none !important;
+    }
+    
+    .table tbody tr {
+        display: block !important;
+        margin-bottom: 1rem !important;
+        border: 1px solid #dee2e6 !important;
+        border-radius: 8px !important;
+        background-color: var(--bg-secundario) !important;
+    }
+    
+    .table tbody td {
+        display: flex !important;
+        justify-content: space-between !important;
+        padding: 0.75rem !important;
+        border: none !important;
+        border-bottom: 1px solid #f0f0f0 !important;
+        color: var(--texto-principal) !important;
+    }
+    
+    .table tbody td:last-child {
+        border-bottom: none !important;
+    }
+    
+    .table tbody td::before {
+        content: attr(data-label) !important;
+        font-weight: 700 !important;
+        color: var(--color-primario) !important;
+        margin-right: 1rem !important;
+    }
+}
+
+/* Tablets (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    body {
+        font-size: 15px !important;
+    }
+    
+    h1 { font-size: 2.2rem !important; }
+    h2 { font-size: 1.85rem !important; }
+    h3 { font-size: 1.6rem !important; }
+    
+    .navbar-brand {
+        font-size: 1.35rem !important;
+    }
+    
+    .container {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+    
+    /* Tablas en tablets - scroll horizontal */
+    .table-responsive {
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    .table {
+        font-size: 0.9rem !important;
+    }
+    
+    .table thead th,
+    .table tbody td {
+        padding: 0.6rem 0.4rem !important;
+        white-space: nowrap !important;
+    }
+}
+
+/* Laptops (992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    body {
+        font-size: 16px !important;
+    }
+    
+    h1 { font-size: 2.3rem !important; }
+    h2 { font-size: 1.9rem !important; }
+    h3 { font-size: 1.7rem !important; }
+}
+
+/* Desktop (1200px+) */
+@media (min-width: 1200px) {
+    body {
+        font-size: 16px !important;
+    }
+    
+    h1 { font-size: 2.5rem !important; }
+    h2 { font-size: 2rem !important; }
+    h3 { font-size: 1.75rem !important; }
+    
+    .container {
+        max-width: 1140px !important;
+    }
+}
+
+/* Pantallas extra grandes (1400px+) */
+@media (min-width: 1400px) {
+    body {
+        font-size: 17px !important;
+    }
+    
+    .container {
+        max-width: 1320px !important;
+    }
+}
+
+/* ===========================
+   MENÚ HAMBURGUESA RESPONSIVE
+=========================== */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: var(--bg-oscuro) !important;
+        margin-top: 0.5rem !important;
+        padding: 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    .navbar-nav {
+        text-align: center !important;
+    }
+    
+    .nav-item {
+        margin: 0.3rem 0 !important;
+    }
+}
+
+/* ===========================
+   UTILIDADES ADICIONALES
+=========================== */
+
+/* Espaciado consistente */
+.mt-4 { margin-top: 1.5rem !important; }
+.mb-3 { margin-bottom: 1rem !important; }
+.mb-4 { margin-bottom: 1.5rem !important; }
+.py-3 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+
+/* Mejorar legibilidad */
+p, li {
+    line-height: 1.7 !important;
+}
+
+/* Scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ===========================
+   ACCESIBILIDAD
+=========================== */
+
+/* Focus visible para teclado */
+*:focus {
+    outline: 2px solid var(--color-secundario) !important;
+    outline-offset: 2px !important;
+}
+
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--color-secundario) !important;
+    outline-offset: 2px !important;
+}
+
+/* ===========================
+   MODO IMPRESIÓN
+=========================== */
+@media print {
+    /* Ocultar elementos no necesarios */
+    .navbar,
+    .btn,
+    footer,
+    .no-print {
+        display: none !important;
+    }
+    
+    /* Optimizar para impresión */
+    body {
+        background-color: white !important;
+        color: black !important;
+        font-size: 12pt !important;
+    }
+    
+    .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    .card {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+
+  
+}
